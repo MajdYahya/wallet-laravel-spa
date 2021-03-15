@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Wallet;
 
-use App\Category;
 use App\Http\Controllers\Controller;
-use App\Transaction;
+use App\Models\Category;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 

@@ -1,4 +1,4 @@
-function page (path) {
+function page(path) {
   return () => import(/* webpackChunkName: '' */ `~/pages/${path}`).then(m => m.default || m)
 }
 
@@ -20,6 +20,15 @@ export default [
       { path: '', redirect: { name: 'settings.profile' } },
       { path: 'profile', name: 'settings.profile', component: page('settings/profile.vue') },
       { path: 'password', name: 'settings.password', component: page('settings/password.vue') }
+    ]
+  },
+  {
+    path: '/transactions',
+    component: page('transactions/index.vue'),
+    children: [
+      { path: '', redirect: { name: 'transactions.income' } },
+      { path: 'income', name: 'transactions.income', component: page('transactions/income.vue') },
+      { path: 'outcome', name: 'transactions.outcome', component: page('transactions/outcome.vue') }
     ]
   },
 

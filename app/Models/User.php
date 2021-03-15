@@ -19,7 +19,7 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
         HasFactory;
     use HasRoles;
 
-
+    protected $guard_name = 'api';
 
     /**
      * The attributes that are mass assignable.
@@ -29,7 +29,7 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
     protected $fillable = [
 
         'name', 'email', 'password', 'phone',
-        'country_code', 'birthday', 'user_image'
+        'country_code', 'birthday', 'user_image', 'role'
 
     ];
 
@@ -143,11 +143,11 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
 
             'transactions as expanses_transactions_count' => function ($query) {
                 $query->select(DB::raw("SUM(amount) as expanses_sum"))
-                ->where('type', 'expanse');
+                    ->where('type', 'expanse');
             },
             'transactions as income_transactions_count' => function ($query) {
                 $query->select(DB::raw("SUM(amount) as income_sum"))
-                ->where('type', 'income');
+                    ->where('type', 'income');
             }
 
         ]);

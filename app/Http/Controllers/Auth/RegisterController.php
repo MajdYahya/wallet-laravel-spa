@@ -82,6 +82,7 @@ class RegisterController extends Controller
             'country_code' => $data['countryCode'],
             'birthday' => $data['birthdate'],
             'user_image' => $data['userImage'],
+            'role' => 'user'
         ]);
     }
 }
