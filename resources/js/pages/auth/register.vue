@@ -113,6 +113,7 @@
                 type="file"
                 accept="image/*"
                 name="userImage"
+                @change="uploadImage($event)"
                 autocomplete="userImage"
               />
 
@@ -199,6 +200,8 @@ export default {
 
   methods: {
     async register() {
+      this.form.userImage = this.userImage;
+
       // Register the user.
       const { data } = await this.form.post("/api/register");
 
@@ -220,6 +223,39 @@ export default {
         // Redirect home.
         this.$router.push({ name: "home" });
       }
+    },
+
+    toBase64(file) {
+      new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+      });
+    },
+
+    async uploadImage($e) {
+      let self = this
+      const URL = "/api/upload-image";
+
+      var reader = new FileReader();
+      reader.readAsDataURL($e.target.files[0]);
+      reader.onload = async function () {
+        const imageData = reader.result;
+        const response = await fetch(URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            image: imageData,
+          }),
+        });
+
+        await response.json().then((json) => {
+          self.userImage = json.path;
+        });
+      };
     },
   },
 };
