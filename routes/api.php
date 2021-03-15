@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\ImageUploaderController;
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
 use App\Http\Controllers\Wallet\AdminController;
@@ -64,3 +65,5 @@ Route::middleware(['role:user'])->group(function () {
     Route::post('transactions', [TransactionController::class, 'add'])->name('add.transactions');
     Route::get('dashboard/user', [DashboardController::class, 'index'])->name('user.transactions');
 });
+
+Route::post('upload-image', [ImageUploaderController::class, 'save']);
