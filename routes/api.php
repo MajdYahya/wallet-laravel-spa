@@ -9,6 +9,9 @@ use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
+use App\Http\Controllers\Wallet\AdminController;
+use App\Http\Controllers\Wallet\DashboardController;
+use App\Http\Controllers\Wallet\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,4 +46,21 @@ Route::group(['middleware' => 'guest:api'], function () {
 
     Route::post('oauth/{driver}', [OAuthController::class, 'redirect']);
     Route::get('oauth/{driver}/callback', [OAuthController::class, 'handleCallback'])->name('oauth.callback');
+});
+
+
+
+Route::group(['middleware' => 'role:admin'], function () {
+    Route::get('admin', [AdminController::class, 'login'])->name('allusers');
+});
+
+
+Route::group(['middleware' => 'role:admin'], function () {
+    Route::get('admin', [AdminController::class, 'login'])->name('allusers');
+});
+
+Route::middleware(['role:user'])->group(function () {
+    Route::get('transactions', [TransactionController::class, 'index'])->name('transactions');
+    Route::post('transactions', [TransactionController::class, 'add'])->name('add.transactions');
+    Route::get('dashboard/user', [DashboardController::class, 'index'])->name('user.transactions');
 });

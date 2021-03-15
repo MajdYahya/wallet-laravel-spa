@@ -8,12 +8,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Spatie\Permission\Traits\HasRoles;
+
 
 class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
 {
     use Notifiable,
         HasFactory;
+    use HasRoles;
+
+
 
     /**
      * The attributes that are mass assignable.
@@ -21,10 +27,10 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name', 'email', 'password', 'phone',
+        'country_code', 'birthday', 'user_image', 'is_admin'
     ];
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -112,5 +118,37 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class);
+    }
+
+    /**
+     * Get the wallet associated with the user.
+     */
+    public function transactions()
+    {
+        return $this->hasManyThrough(Transaction::class, Wallet::class);
+    }
+    /*
+    * get the count of expanses and income
+    */
+    public function countExpansesAndIncome()
+    {
+        $query = $this->withCount([
+
+            'transactions as expanses_transactions_count' => function ($query) {
+                $query->select(DB::raw("SUM(amount) as expanses_sum"))
+                ->where('type', 'expanse');
+            },
+            'transactions as income_transactions_count' => function ($query) {
+                $query->select(DB::raw("SUM(amount) as income_sum"))
+                ->where('type', 'income');
+            }
+
+        ]);
+        return $query;
     }
 }
