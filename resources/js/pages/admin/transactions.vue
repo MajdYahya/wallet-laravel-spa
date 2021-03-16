@@ -65,8 +65,6 @@ export default {
     axios
       .get('/api/adminusers')
       .then(response => (this.usersTable = response.data.users))
-      // console.log("mounted executed")
-      // console.log(this.usersTable)
   }
 };
 </script>
