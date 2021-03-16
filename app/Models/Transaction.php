@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 class Transaction extends Model
 {
     //
-    protected $fillable = ['amount', 'wallet_id', 'type', 'category_id'];
+    protected $fillable = ['id','amount', 'wallet_id', 'type', 'category_id'];
 
 
     /**

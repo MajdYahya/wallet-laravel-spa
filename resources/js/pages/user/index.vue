@@ -1,12 +1,8 @@
 <template>
   <div class="row">
-    <div class="col-md-3">
-      <card :title="$t('settings')" class="settings-card">
 
-      </card>
-    </div>
 
-    <div class="col-md-9">
+    <div class="col-md-12">
       <transition name="fade" mode="out-in">
         <router-view />
       </transition>
