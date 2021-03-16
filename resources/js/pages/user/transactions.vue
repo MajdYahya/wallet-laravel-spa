@@ -1,5 +1,25 @@
 <template>
   <card :title="$t('your_password')">
+     <div class="row ">
+      <div class="col-4 border-right ">
+          <div class="h-100 justify-content-center align-items-center">
+              <h4 class="text-center">Wallet Balance</h4>
+              <h2 class="text-center">{{ $balance }}</h2>
+          </div>
+      </div>
+      <div class="col-4 justify-content-center">
+          <div class="h-100 justify-content-center align-items-center">
+              <h4 class="text-center">Income</h4>
+              <h2 class="text-center">+{{ $income }}</h2>
+          </div>
+      </div>
+      <div class="col-4 border-left justify-content-center">
+          <div class="h-100 justify-content-center align-items-center">
+              <h4 class="text-center">Expenses</h4>
+              <h2 class="text-center">-{{ $expanse }}</h2>
+          </div>
+      </div>
+  </div>
     <table class="table" @submit.prevent="tableUsersUpdte">
       <thead class="thead-dark">
         <tr>
@@ -28,7 +48,7 @@
         </tr>
       </tbody>
     </table>
-  
+
   </card>
 </template>
 
@@ -50,6 +70,10 @@ export default {
       password_confirmation: "",
     }),
     usersTable: ["1","43"],
+    balance:"11111",
+    income:"222222",
+    expanse:"33333333"
+
   }),
 
   methods: {

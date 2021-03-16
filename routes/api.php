@@ -58,7 +58,7 @@ Route::group([], function () {
     Route::get('adminusers', [AdminController::class, 'index'])->name('allusers');
 });
 
-Route::middleware(['role:user'])->group(function () {
+Route::middleware([])->group(function () {
     Route::get('transactions', [TransactionController::class, 'index'])->name('transactions');
     Route::post('transactions', [TransactionController::class, 'add'])->name('add.transactions');
     Route::get('dashboard/user', [DashboardController::class, 'index'])->name('user.transactions');
