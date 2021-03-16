@@ -31,6 +31,26 @@ export default [
       { path: 'outcome', name: 'transactions.outcome', component: page('transactions/outcome.vue') }
     ]
   },
+  {
+    path: '/admin',
+    component: page('admin/index.vue'),
+    children: [
+      { path: '', redirect: { name: 'admin.transactions' } },
+      { path: 'income', name: 'admin.transactions', component: page('admin/transactions.vue') },
+
+
+    ]
+  },
+    {
+    path: '/user',
+    component: page('user/index.vue'),
+    children: [
+      { path: '', redirect: { name: 'user.transactions' } },
+      { path: 'income', name: 'user.transactions', component: page('user/transactions.vue') },
+
+
+    ]
+  },
 
   { path: '*', component: page('errors/404.vue') }
 ]

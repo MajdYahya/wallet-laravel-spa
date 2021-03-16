@@ -28,7 +28,8 @@ class AdminController extends Controller
                 ->where('type', 'income');
         }])
             ->get();
-     
-        return view('wallet.admin.index')->with(compact('users'));
+        return response()->json(["users" => $users], 200);
+
+        // return view('wallet.admin.index')->with(compact('users'));
     }
 }

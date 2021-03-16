@@ -51,13 +51,11 @@ Route::group(['middleware' => 'guest:api'], function () {
 
 
 
-Route::group(['middleware' => 'role:admin'], function () {
-    Route::get('admin', [AdminController::class, 'login'])->name('allusers');
-});
 
 
-Route::group(['middleware' => 'role:admin'], function () {
-    Route::get('admin', [AdminController::class, 'login'])->name('allusers');
+
+Route::group([], function () {
+    Route::get('adminusers', [AdminController::class, 'index'])->name('allusers');
 });
 
 Route::middleware(['role:user'])->group(function () {

@@ -34,13 +34,8 @@ export default {
       return [
         {
           icon: "user",
-          name: this.$t("income"),
-          route: "transactions.income",
-        },
-        {
-          icon: "user",
-          name: this.$t("outcome"),
-          route: "transactions.outcome",
+          name: this.$t("transactions"),
+          route: "admin.transactions",
         },
       ];
     },
