@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  middleware: "role:user",
+  middleware: "auth",
 
   computed: {
     tabs() {
