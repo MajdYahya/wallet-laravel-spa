@@ -21,9 +21,10 @@ class TransactionController extends Controller
     public function index()
     {
         $transactions = Transaction::userTransactions()
-            ->paginate(15);
+            ->get();
+        return response()->json(["transactions" => $transactions], 200);
 
-        return view('wallet.transaction.index')->with(compact('transactions'));
+        // return view('wallet.transaction.index')->with(compact('transactions'));
     }
 
     /**
