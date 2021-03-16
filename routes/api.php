@@ -11,6 +11,7 @@ use App\Http\Controllers\ImageUploaderController;
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
 use App\Http\Controllers\Wallet\AdminController;
+use App\Http\Controllers\Wallet\CategoriesController;
 use App\Http\Controllers\Wallet\DashboardController;
 use App\Http\Controllers\Wallet\TransactionController;
 use Illuminate\Support\Facades\Route;
@@ -58,7 +59,9 @@ Route::group([], function () {
     Route::get('adminusers', [AdminController::class, 'index'])->name('allusers');
 });
 
-Route::middleware(['role:user'])->group(function () {
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('categories', [CategoriesController::class, 'index'])->name('categories');
     Route::get('transactions', [TransactionController::class, 'index'])->name('transactions');
     Route::post('transactions', [TransactionController::class, 'add'])->name('add.transactions');
     Route::get('dashboard/user', [DashboardController::class, 'index'])->name('user.transactions');
