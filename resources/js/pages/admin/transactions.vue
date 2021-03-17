@@ -1,5 +1,5 @@
 <template>
-  <card :title="$t('your_password')">
+  <card :title="$t('All users data')">
     <table class="table" @submit.prevent="tableUsersUpdte">
       <thead class="thead-dark">
         <tr>
@@ -28,7 +28,7 @@
         </tr>
       </tbody>
     </table>
-  
+
   </card>
 </template>
 

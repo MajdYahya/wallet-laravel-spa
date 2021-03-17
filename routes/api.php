@@ -55,7 +55,7 @@ Route::group(['middleware' => 'guest:api'], function () {
 
 
 
-Route::group(['auth'], function () {
+Route::group([], function () {
     Route::get('adminusers', [AdminController::class, 'index'])->name('allusers');
 });
 

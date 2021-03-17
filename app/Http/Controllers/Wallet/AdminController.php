@@ -28,7 +28,6 @@ class AdminController extends Controller
                 ->select(DB::raw("SUM(amount) as income_sum"))
                 ->where('type', 'income');
         }])
-            ->where('id', '=', Auth::user()->id)
             ->get();
         return response()->json(["users" => $users], 200);
 

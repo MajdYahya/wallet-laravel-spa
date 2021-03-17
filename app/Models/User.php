@@ -18,6 +18,8 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
         HasFactory;
 
     protected $guard_name = 'api';
+    // protected $dateFormat = 'U';
+
 
     /**
      * The attributes that are mass assignable.
@@ -132,6 +134,8 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
     {
         return $this->hasManyThrough(Transaction::class, Wallet::class);
     }
+
+
     /*
     * get the count of expanses and income
     */

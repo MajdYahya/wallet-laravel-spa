@@ -32,7 +32,7 @@
             name="type"
             @change="handleTypeChange($event)"
           >
-            <option value="expense">expense</option>
+            <option value="expanse">expense</option>
             <option value="income">income</option>
           </select>
           <has-error :form="form" field="type" />
