@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 class Transaction extends Model
 {
     //
-    protected $fillable = ['id','amount', 'wallet_id', 'type', 'category_id'];
+    protected $fillable = ['id', 'amount', 'wallet_id', 'type', 'category_id'];
 
 
     /**
@@ -82,5 +82,15 @@ class Transaction extends Model
         $wallet = Wallet::where('user_id', '=', Auth::user()->id)
             ->first();
         return $query->where('wallet_id', $wallet->id);
+    }
+    public function toArray()
+    {
+        return [
+            'id' => $this->id,
+            'type' => $this->type,
+            'amount' => $this->amount,
+            'category' => $this->category->name,
+
+        ];
     }
 }

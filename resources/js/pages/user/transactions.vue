@@ -2,10 +2,11 @@
 <div>
  <div class="container">
         <div class="row mb-3">
-            <h2>
+
+            <div class="col-md-12">
+              <h2>
                 My walllet transactions and summary
             </h2>
-            <div class="col-md-12">
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
@@ -36,10 +37,12 @@
         </div>
 
   <card :title="$t('last_transactions')">
+<router-link class="btn btn-primary btn-lg btn-block" to="/user/create-transaction"><b>+</b>Add transaction</router-link>
 
     <table class="table" @submit.prevent="tableUsersUpdte">
       <thead class="thead-dark">
         <tr>
+
         <th scope="col">#</th>
         <th scope="col">Type</th>
         <th scope="col">Amount</th>
@@ -51,21 +54,18 @@
           <th scope="row">{{ transaction.id }}</th>
           <td>{{ transaction.type }}</td>
           <td>{{transaction.amount}}</td>
-       <td>{{transaction.amount}}</td>
+       <td>{{transaction.category}}</td>
 
         </tr>
       </tbody>
     </table>
-
   </card>
   </div>
     </div>
 </template>
 
 <script>
-import Form from "vform";
-import axios from 'axios'
-
+import axios from "axios";
 
 export default {
   scrollToTop: false,
@@ -75,32 +75,27 @@ export default {
   },
 
   data: () => ({
-    form: new Form({
-      password: "",
-      password_confirmation: "",
-    }),
-    balance:"11111",
-    income:"222222",
-    expanse:"33333333",
+
+    balance:"",
+    income:"",
+    expanse:"",
     transactions:""
 
   }),
-
-  methods: {
-    async update() {
-      await this.form.patch("/api/settings/password");
-
-      this.form.reset();
-    },
-
-  },
-   mounted () {
-
+  mounted() {
     axios
       .get('/api/transactions')
       .then(response => (this.transactions = response.data.transactions))
+
+    axios
+    .get('/api/dashboard/user')
+    .then(response => (this.balance = response.data.balance,
+    this.expanse = response.data.expanse,
+     this.income = response.data.income))
+
       // console.log("mounted executed")
       // console.log(this.usersTable)
   }
+
 };
 </script>

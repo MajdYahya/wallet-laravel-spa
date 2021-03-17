@@ -28,7 +28,7 @@ class DashboardController extends Controller
             ->sum('amount');
         // dd($income);
         $balance = $income - $expanse;
-        return view('wallet.dashboard.index', ['expanse' => $expanse, 'income' => $income, 'balance' => $balance,]);
+        return response()->json(['expanse' => $expanse, 'income' => $income, 'balance' => $balance], 200);
     }
     public function frequentTransactions(Request $request)
     {

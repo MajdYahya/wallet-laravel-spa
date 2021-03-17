@@ -47,6 +47,7 @@ export default [
     children: [
       { path: '', redirect: { name: 'user.transactions' } },
       { path: 'income', name: 'user.transactions', component: page('user/transactions.vue') },
+      { path: 'create-transaction', name: 'user.create_transaction', component: page('user/create.vue') },
 
 
     ]

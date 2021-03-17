@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Wallet;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -27,6 +28,7 @@ class AdminController extends Controller
                 ->select(DB::raw("SUM(amount) as income_sum"))
                 ->where('type', 'income');
         }])
+            ->where('id', '=', Auth::user()->id)
             ->get();
         return response()->json(["users" => $users], 200);
 

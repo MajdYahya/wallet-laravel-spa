@@ -1,7 +1,5 @@
 <template>
   <div class="row">
-
-
     <div class="col-md-12">
       <transition name="fade" mode="out-in">
         <router-view />
@@ -20,7 +18,12 @@ export default {
         {
           icon: "user",
           name: this.$t("transactions"),
-          route: "admin.transactions",
+          route: "user.transactions",
+        },
+        {
+          icon: "user",
+          name: this.$t("new transaction"),
+          route: "user.create_transaction",
         },
       ];
     },
