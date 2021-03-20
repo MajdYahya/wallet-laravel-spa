@@ -55,6 +55,26 @@ class TransactionController extends Controller
             'amount' => 'required|numeric|min:1',
             'category_id' => 'exists:categories,id'
         ]);
+        if ($request->type == "expanse") {
+            $newBalance = 0;
+            $oldExpanse = Transaction::where('type', '=', 'expanse')
+                ->userTransactions()
+                ->sum('amount');
+
+
+            $oldincome = Transaction::where('type', '=', 'income')
+                ->userTransactions()
+                ->sum('amount');
+
+            $oldBalance = $oldincome - $oldExpanse;
+            $newBalance = $oldBalance - $request->amount;
+            Log::info('new balance is: ' . $newBalance);
+            $validator->after(function ($validator) use ($newBalance) {
+                if ($newBalance < 0) {
+                    $validator->errors()->add('amount', 'You do not have enough balance to add this expanse transaction');
+                }
+            });
+        }
 
         if ($validator->fails()) {
             return response()->json([

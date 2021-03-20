@@ -93,7 +93,11 @@ export default {
 
   methods: {
     async update() {
-      await this.form.post("/api/transactions");
+
+      await this.form.post("/api/transactions")
+      .then(res => {       this.form.reset(); })
+         .catch((err) => {console.log(err)});
+
 
       this.form.reset();
     },

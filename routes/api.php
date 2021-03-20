@@ -55,11 +55,11 @@ Route::group(['middleware' => 'guest:api'], function () {
 
 
 
-Route::group([], function () {
+Route::middleware(['auth', 'user'])->group(function () {
     Route::get('adminusers', [AdminController::class, 'index'])->name('allusers');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'user'])->group(function () {
 
     Route::get('categories', [CategoriesController::class, 'index'])->name('categories');
     Route::get('transactions', [TransactionController::class, 'index'])->name('transactions');
